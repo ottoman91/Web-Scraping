@@ -14,8 +14,8 @@ def get_state_links(BASE_URL):
 	soup = BeautifulSoup(html, "lxml")
 	state_list = soup.find_all("ul","tab-list tab-list-short") 
 	for list in state_list: 
-		state_links = [li.a["href"] for li in list.findAll("li")] 
-		STATE_LINKS.append(state_links) 
+		state_links = [li.a["href"] for li in list.findAll("li")]  
+		STATE_LINKS.extend(state_links) 
 	return STATE_LINKS 
 	#return state_links 
 
@@ -32,7 +32,7 @@ def get_school_info(state_url):
 	return school_info 
 
 state_info = get_state_links(BASE_URL) 
-print state_info #for testing 
+#print state_info #for testing 
 
 
 for info_link in state_info:
