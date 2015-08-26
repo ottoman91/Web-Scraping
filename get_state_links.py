@@ -17,23 +17,27 @@ def get_state_links(BASE_URL):
 		state_links = [li.a["href"] for li in list.findAll("li")] 
 		STATE_LINKS.append(state_links) 
 	return STATE_LINKS 
-data.append(get_state_links(BASE_URL)) #for testing
-print data #for testing
-	
-#def get_school_info(state_url):
-#	html = urlopen(state_url).read()
-#	soup = BeautifulSoup(html,"lxml")
-#	state = soup.find("h1","city").string  
-#	school_data_table = soup.find("div","table-responsive") 
-#	school_info = [td.string for td in school_data_table.findAll("td")]
-#	return (school_info,state) 
+	#return state_links 
 
-#state_info = get_state_links(BASE_URL) 
-
-#for info_link in state_info:
-#	school_infos,state = get_school_info(info_link) 
-#	data.append(state)
+#data.append(get_state_links(BASE_URL)) #for testing
+#print data #for testing
 	
 
-#print data
+def get_school_info(state_url):
+	html = urlopen(state_url).read()
+	soup = BeautifulSoup(html,"lxml")
+	state = soup.find("h1","city").string  
+	school_data_table = soup.find("div","table-responsive") 
+	school_info = [td.string for td in school_data_table.findAll("td")]
+	return school_info 
 
+state_info = get_state_links(BASE_URL) 
+print state_info #for testing 
+
+
+for info_link in state_info:
+	school_infos = get_school_info(info_link) 
+	data.append(school_infos)
+	
+
+print data
